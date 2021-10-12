@@ -19,11 +19,11 @@ class TaskEntity {
   public difficulty: string;
   public date: Date;
 
-  constructor(message: string) {
+  constructor(message: string, created_at: string) {
     this.content = this.toContent(message);
     this.priority = this.toPriority(message); 
     this.difficulty = 'low';
-    this.date = new Date();
+    this.date = new Date(created_at);
   }
 
   public publishedAt(): string {
