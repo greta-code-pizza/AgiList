@@ -1,25 +1,18 @@
 class TaskEntity {
   public static levels: Array<string> = ['lowest', 'low', 'medium', 'high', 'highest'];
-  public static levelToScore(level: string): number {
-    let i = TaskEntity.levelToIndex(level) + 2;
-    let j = 0;
-
-
-
-    return 1;
-  }
 
   public static levelToIndex(level: string): number {
     return TaskEntity.levels.indexOf(level);
   }
 
-
+  public id: number;
   public content: string;
   public priority: string;
   public difficulty: string;
   public date: Date;
 
-  constructor(message: string, created_at: string) {
+  constructor(id: number, message: string, created_at: string) {
+    this.id = id;
     this.content = this.toContent(message);
     this.priority = this.toPriority(message); 
     this.difficulty = 'low';
