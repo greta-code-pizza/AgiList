@@ -7,7 +7,6 @@ export default function TaskComponent(props) {
 
   return (
     <div key={props.id} className="panel panel-todo" >
-      <span className="cross" onClick={props.remove}>x</span>
       <span>Task published on {props.publishedAt}</span>
       <p>{props.message}</p>
       <div>

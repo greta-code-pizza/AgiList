@@ -5,6 +5,16 @@ class TaskEntity {
     return TaskEntity.levels.indexOf(level);
   }
 
+  public static currentToTimestamp(): string {
+    let date = new Date();
+
+    let day: string = String(date.getDate()).padStart(2, '0'); 
+    let month: string = String(date.getMonth() + 1).padStart(2, '0'); 
+    let year: string = String(date.getFullYear())
+
+    return `${year}-${month}-${day}T00:00:00`;
+  }
+
   public id: number;
   public content: string;
   public priority: string;
@@ -20,11 +30,9 @@ class TaskEntity {
   }
 
   public publishedAt(): string {
-    let day: string = String(this.date.getDate()).padStart(2, '0'); 
-    let month: string = String(this.date.getMonth() + 1).padStart(2, '0'); 
-    let year: string = String(this.date.getFullYear());
+    let dmy: Array<String> = this.dayMonthYear(); 
 
-    return `${day}/${month}/${year}`;
+    return `${dmy[0]}/${dmy[1]}/${dmy[2]}`;
   }
 
   public priorityIndex(): number {
@@ -54,6 +62,14 @@ class TaskEntity {
 
   private countLevel(message: string): number {
     return (message.match(/!/g) || []).length;
+  }
+
+  private dayMonthYear(): Array<String> {
+    let day: string = String(this.date.getDate()).padStart(2, '0'); 
+    let month: string = String(this.date.getMonth() + 1).padStart(2, '0'); 
+    let year: string = String(this.date.getFullYear());
+
+    return [day, month, year];
   }
 }
 

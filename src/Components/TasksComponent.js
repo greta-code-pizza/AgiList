@@ -6,7 +6,7 @@ import { HeaderLayout } from './Layouts';
 export default function TasksComponent(props) {
   return (
     <>
-      <HeaderLayout />
+      <HeaderLayout user={props.user}/>
       <TaskFormComponent   
         handleTodo={props.handleTodo}
         handleMessage={props.handleMessage} 
@@ -15,7 +15,7 @@ export default function TasksComponent(props) {
 
       {props.list}
 
-      <button onClick={() => props.supabase.auth.signOut()}>Se déconnecter</button>
+      <button onClick={() => props.handleSignOut()}>Se déconnecter</button>
     </>
   )
 };
