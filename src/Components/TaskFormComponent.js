@@ -1,12 +1,20 @@
 import React from 'react';
 
-export default function TaskFormComponent(props) {
+export default function TaskFormComponent({
+  currentTask, 
+  handleCurrentTask, 
+  handleAddCurrentTask
+}) {
+  const handleAddTask = (e) => {
+    if (e.key === 'Enter') { handleAddCurrentTask(currentTask) }
+  }
+
   return (
     <>
       <textarea 
-        onKeyPress={props.handleTodo}
-        onChange={props.handleMessage} 
-        value={props.currentMessage}
+        onKeyPress={(e) => handleAddTask(e)}
+        onChange={(e) => handleCurrentTask(e.target.value)} 
+        value={currentTask}
       /> 
     </>
   )

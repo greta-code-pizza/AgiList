@@ -1,13 +1,26 @@
 import React from 'react';
 
-export default function LoginComponent(props) {
-  return (
-    <button 
-      onClick={() => props.handleAddUser()}
+export default function LoginComponent({user, handleLogIn, handleLogOut}) {
+  if (user) {
+    return (
+      <button 
+      onClick={() => handleLogOut()}
     >
-      Me co avec Github
-    </button>
-  )
+      Me déco
+  </button>
+    )
+  } else {
+    return (
+      <button 
+        onClick={() => handleLogIn({ 
+          avatar_url: "https://avatars.githubusercontent.com/u/7339794",
+          full_name: "nicolaslechenic"
+        })}
+      >
+        Me co avec Github
+      </button>
+    )
+  }
 };
 
 

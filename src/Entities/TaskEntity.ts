@@ -21,26 +21,30 @@ class TaskEntity {
   public difficulty: string;
   public date: Date;
 
-  constructor(id: number, message: string, created_at: string) {
-    this.id = id;
+  constructor(message: string, created_at: string) {
     this.content = this.toContent(message);
     this.priority = this.toPriority(message); 
     this.difficulty = 'low';
     this.date = new Date(created_at);
   }
 
-  public publishedAt(): string {
+  public serialize(): Object {
+    return {
+      content: this.content, 
+      publishedAt: this.publishedAt(),
+      priority: this.priority,
+      level: this.priorityIndex()
+    }
+  }
+
+  private publishedAt(): string {
     let dmy: Array<String> = this.dayMonthYear(); 
 
     return `${dmy[0]}/${dmy[1]}/${dmy[2]}`;
   }
 
-  public priorityIndex(): number {
+  private priorityIndex(): number {
     return TaskEntity.levels.indexOf(this.priority);
-  }
-
-  public priorityClassName(): string {
-    return this.priority.split(' ').join('-');
   }
 
   private toContent(message: string): string {
